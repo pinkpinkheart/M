@@ -1,0 +1,50 @@
+Tsl2561
+	本文件夹内名为Adafruit_TSL2591_Library-master为此光强传感器的库，调用此库内  tsl.calculateLux  函数即可读取光强。
+Tsl2561.ino 内即为使用此传感器的代码
+	设备连接到网络  bigiot.ino
+WiFi.begin(ssid, password)
+	上传到贝壳   bigiot.ino
+1.	Stl2561登陆到贝壳：
+"{\"M\":\"checkin\",\"ID\":\"str1\",\"K\":\"str2\"}\n"
+Str1为设备ID
+Str2为设备APIKEY
+2.	将数据上传到数据接口
+"{\"M\":\"update\",\"ID\":\"str1\",\"V\":{\"str4\"}}\n"
+Str1即为设备ID
+Shr4为数据接口ID
+	Up-to- bigio.ino 是将tsl2561光强传感器联网、连接到贝壳、上传光强数据到贝壳的最终代码
+即为tsl2561.ino与bigiot.ino的融合
+	上传数据到    江西理工大学智慧农业系统   网站     
+原始上传数据代码为test.ino
+只需将tsl2561.ino与test.ino相融合，使得tsl2561的数据可以上传到    江西理工大学智慧农业系统   网站     
+	上传至    江西理工大学智慧农业系统   网站     
+Up-to-int.ino即为上传代码
+
+
+
+
+
+
+	注
+
+上传数据在
+"{\"M\":\"update\",\"ID\":\"str1\",\"V\":{\"str4\"}}\n"
+应注意str4若为变量，则若直接把变量名称写入即为上传字符串
+应将变量以值的形似上传
+如可将此句分开
+client.print("{\"M\":\"update\",\"ID\":\"");
+client.print(5063);
+client.print("\",\"V\":{\"");
+  client.print(4575);
+  client.print("\":\"");
+  client.print(value1);
+client.println("\"}}");
+
+
+
+
+上传数据至    江西理工大学智慧农业系统   网站     时使用8266，只有两个引脚
+需加头文件<Wire.h>，并在set up内写Wire.begin(0,2);
+此时IO0为SCL，IO1为SDA，
+下载程序到8266是需将IO0接地，下载完成后重新连接线路
+
