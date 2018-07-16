@@ -32,27 +32,6 @@ float dhtTem = 0.0;  //温湿度
 
 float Value ;   //存储云端下发的阀值
 
-/*
-   上传json关键字
-   Temperature   //温度
-   Humidity　　　//湿度　
-   CO2　　        //二氧化碳
-   PH            //PH值
-   Illumination　//光照
-
-   下发json关键字
-   水阀控制
-   getHydrovalvePin1
-   setHydrovalvePin1
-   电机控制
-   getMotorPin1
-   setMotorPin1
-   小车位置控制
-   getCarPos
-   setCarPos
-*/
-
-
 int status = WL_IDLE_STATUS;
 
 boolean gpioState[] = {false, false, false, false, false};
@@ -117,16 +96,6 @@ void loop()
     dht11Func();
     client.publish(StateTopicAddr, Data().c_str());
   }
-//  if(dhtTem>Value)
-//  {
-//    digitalWrite(HydrovalvePin,HIGH);
-//    gpioState[HydrovalvePin]=true;
-//  }
-//  else
-//  {
-//    digitalWrite(HydrovalvePin,LOW);
-//    gpioState[HydrovalvePin]=false;
-//  }
   
   client.loop();
 }
@@ -201,19 +170,19 @@ void set_gpio_status(int PIN, boolean enabled)
   }
 
 }
-
-void toggle(int GPIO)   //以灯的反转作为测试代码
-{
-  digitalWrite(GPIO, digitalRead(GPIO) ? LOW : HIGH);
-  //  if ( HIGH == digitalRead(GPIO) )
-  //  {
-  //    digitalWrite(GPIO, LOW);
-  //  }
-  //  else
-  //  {
-  //    digitalWrite(GPIO, HIGH);
-  //  }
-}
+//
+//void toggle(int GPIO)   //以灯的反转作为测试代码
+//{
+//  digitalWrite(GPIO, digitalRead(GPIO) ? LOW : HIGH);
+//  //  if ( HIGH == digitalRead(GPIO) )
+//  //  {
+//  //    digitalWrite(GPIO, LOW);
+//  //  }
+//  //  else
+//  //  {
+//  //    digitalWrite(GPIO, HIGH);
+//  //  }
+//}
 
 void on_message(const char* topic, byte* payload, unsigned int length)
 {
